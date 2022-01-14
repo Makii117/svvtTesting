@@ -1,27 +1,59 @@
 package main;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.io.*;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.StringTokenizer;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-
-public class getCookiesTest {
+public class logIn {
     private static WebDriver webDriver;
     private static String baseUrl;
     private String Email="steel-fifty-32@inboxkitten.com";
     private String uName="steel-fifty-32";
     private String Password = "SvvtTestingAccount1";
+
+    public void login() throws InterruptedException {
+        System.setProperty("webdriver.chrome.driver","chromedriver.exe");
+        webDriver= new ChromeDriver();
+        webDriver.manage().window().maximize();
+
+        baseUrl="https://www.deezer.com/en/";
+        try{
+            File file = new File("Cookies.data");
+            FileReader fileReader = new FileReader(file);
+            BufferedReader Buffreader = new BufferedReader(fileReader);
+            String strline;
+            while((strline=Buffreader.readLine())!=null){
+                StringTokenizer token = new StringTokenizer(strline,";");
+                while(token.hasMoreTokens()){
+                    String name = token.nextToken();
+                    String value = token.nextToken();
+                    String domain = token.nextToken();
+                    String path = token.nextToken();
+                    Date expiry = null;
+
+                    String val;
+                    if(!(val=token.nextToken()).equals("null"))
+                    {
+                        Date expDate = new SimpleDateFormat( "EEE MMM dd HH:mm:ss z yyyy").parse(val);
+                        expiry = expDate;
+                    }
+                    Boolean isSecure = Boolean.valueOf(token.nextToken());
+                    Cookie ck = new Cookie(name,value,domain,path,expiry,isSecure);
+                    System.out.println(ck);
+                    webDriver.manage().addCookie(ck); // This will add the stored cookie to your current session
+                }
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        Thread.sleep(2000);
+        webDriver.get(baseUrl);
+        System.out.println("Logged in successfully");
+    }
 
     void getCookie() throws InterruptedException {
 
@@ -83,67 +115,7 @@ public class getCookiesTest {
         {
             ex.printStackTrace();
         }
-
         Thread.sleep(2000);
-        webDriver.close();
-
-    }
-    @BeforeEach
-    void setup() throws InterruptedException {
-        System.setProperty("webdriver.chrome.driver","chromedriver.exe");
-        webDriver= new ChromeDriver();
-        webDriver.manage().window().maximize();
-
-        baseUrl="https://www.deezer.com/en/";
-        try{
-            getCookie();
-            File file = new File("Cookies.data");
-            FileReader fileReader = new FileReader(file);
-            BufferedReader Buffreader = new BufferedReader(fileReader);
-            String strline;
-            while((strline=Buffreader.readLine())!=null){
-                StringTokenizer token = new StringTokenizer(strline,";");
-                while(token.hasMoreTokens()){
-                    String name = token.nextToken();
-                    String value = token.nextToken();
-                    String domain = token.nextToken();
-                    String path = token.nextToken();
-                    Date expiry = null;
-
-                    String val;
-                    if(!(val=token.nextToken()).equals("null"))
-                    {
-                        Date expDate = new SimpleDateFormat( "EEE MMM dd HH:mm:ss z yyyy").parse(val);
-                        expiry = expDate;
-                    }
-                    Boolean isSecure = Boolean.valueOf(token.nextToken());
-                    Cookie ck = new Cookie(name,value,domain,path,expiry,isSecure);
-                    System.out.println(ck);
-                    webDriver.manage().addCookie(ck); // This will add the stored cookie to your current session
-                }
-            }
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }
-        Thread.sleep(2000);
-        webDriver.get(baseUrl);
-        Thread.sleep(2000);
-
-    }
-
-    @AfterEach
-    void teardown(){
-        webDriver.close();
-    }
-    @Test
-    void test() throws InterruptedException {
-        Thread.sleep(2000);
-        assertEquals("steel-fifty-32",webDriver.findElement(By.xpath("//*[@id=\"page_topbar\"]/div[3]/button/img")).getAttribute("alt"));
-
-    }
-
-    @Test
-    void playSong(){
 
     }
 
