@@ -20,8 +20,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class loginRegisterTest {
     private static WebDriver webDriver;
     private static String baseUrl;
-    private String Email="spread-tie-57@inboxkitten.com";
-    private String uName="spread-tie-57";
+    //Use dummy email and password from https://inboxkitten.com/
+    //
+    private String Email="steel-fifty-32@inboxkitten.com";
+    private String uName="steel-fifty-32";
 
 
     @BeforeEach
@@ -82,7 +84,7 @@ class loginRegisterTest {
         String pwType;
         pwType = password.getAttribute("Type");
         assertEquals("password",pwType);
-
+        //in case of another cookie pop up, just close it fast
         pwHider = webDriver.findElement(By.xpath("/html/body/div[2]/div/div[3]/form/div[3]/span"));
         pwHider.click();
 
@@ -129,6 +131,8 @@ class loginRegisterTest {
         //finish sign up
         WebElement signUpButton = webDriver.findElement(By.xpath("//*[@id=\"register_form_submit\"]"));
         signUpButton.click();
+        //In case of captcha uncomment and click fast
+        //Thread.sleep(20000);
         WebElement welcomeHeader = webDriver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div[2]/div[1]/div[1]/h1"));
 
         assertEquals("Welcome",welcomeHeader.getText());
@@ -157,7 +161,7 @@ class loginRegisterTest {
         webDriver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[3]/button")).click();
 
         //assert that profile drop down is open
-        assertEquals("topbar-profile is-active",webDriver.findElement(By.className("topbar-profile is-active")).getAttribute("class"));
+        assertEquals("topbar-profile is-active",webDriver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[3]/button")).getAttribute("class"));
         //assert that the username matches the registered one
         assertEquals(uName,webDriver.findElement(By.className("account-name")).getText());
 
