@@ -24,7 +24,7 @@ class loginRegisterTest {
     //
     private String Email="steel-fifty-32@inboxkitten.com";
     private String uName="steel-fifty-32";
-
+    private String Password = "SvvtTestingAccount1";
 
     @BeforeEach
     void setUp() throws InterruptedException {
@@ -53,9 +53,27 @@ class loginRegisterTest {
     }
 
     @Test
-    void loginTest(){
+    void loginTest() throws InterruptedException {
+        WebElement loginButton = webDriver.findElement(By.xpath("/html/body/div[1]/div/a"));
+        loginButton.click();
 
+        // form
+        WebElement emailField = webDriver.findElement(By.xpath("//*[@id=\"login_mail\"]"));
+        emailField.sendKeys(Email);
+        // password - > SvvtTestingAccount1
+        WebElement passwordField = webDriver.findElement(By.xpath("//*[@id=\"login_password\"]"));
+        passwordField.sendKeys(Password);
+        Thread.sleep(2000);
 
+        WebElement loginBtn = webDriver.findElement(By.id("login_form_submit"));
+        loginBtn.click();
+        // in case of captcha, which can happen it is left to 20000 so we can click through it
+        Thread.sleep(20000);
+
+        // test if we made it to the personalized homepage
+        WebElement text = webDriver.findElement(By.className("heading-2"));
+
+        assertEquals("Made for you", text.getText());
     }
 
     @Test

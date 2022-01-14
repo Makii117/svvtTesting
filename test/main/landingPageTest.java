@@ -40,7 +40,7 @@ public class landingPageTest {
     }
 
 
-    // TODO : CHECK IF NEEDED 
+    // TODO : CHECK IF NEEDED
     @Test
     void testPageName(){
         String title = webDriver.getTitle();
