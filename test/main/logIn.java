@@ -24,6 +24,20 @@ public class logIn {
 
         baseUrl="https://www.deezer.com/en/";
         driver.get(baseUrl);
+
+        //accept cookies
+        try{
+            WebElement acceptCookiesBtn;
+            acceptCookiesBtn = webDriver.findElement(By.xpath("//*[@id=\"gdpr-btn-accept-all\"]"));
+            acceptCookiesBtn.click();
+
+        }catch (ElementNotVisibleException e){
+            System.out.println("Cookies already accepted");
+
+        }catch (NullPointerException e){
+            System.out.println(e);
+        }
+
         try{
             File file = new File("Cookies.data");
             FileReader fileReader = new FileReader(file);
