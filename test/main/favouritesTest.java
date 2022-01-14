@@ -115,14 +115,15 @@ public class favouritesTest {
     @Test
     void testAddFavourite() throws InterruptedException {
         WebElement artists_tab  = webDriver.findElement(By.xpath("/html/body/div[1]/div/div[4]/div[2]/div[3]/div/ul/li[8]/a"));
+       Thread.sleep(1000);
         artists_tab.click();
+
         Thread.sleep(10000);
 
         WebElement add_artist = webDriver.findElement(By.xpath("//*[@id=\"page_profile\"]/div[2]/div/div/section/div[2]/ul/li[1]/div[2]/div/button"));
         Thread.sleep(10000);
         add_artist.click();
-
-
+        Thread.sleep(1000);
         WebElement add_button = webDriver.findElement(By.xpath("//*[@id=\"dzr-app\"]/div/div[1]/div[2]/div[1]/div[3]/button"));
         add_button.click();
         Thread.sleep(1000);
