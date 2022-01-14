@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.StringTokenizer;
 
 public class logIn {
@@ -15,12 +16,28 @@ public class logIn {
     private String uName="steel-fifty-32";
     private String Password = "SvvtTestingAccount1";
 
-    public void login() throws InterruptedException {
+    public WebDriver login() throws InterruptedException {
+        WebDriver driver;
         System.setProperty("webdriver.chrome.driver","chromedriver.exe");
-        webDriver= new ChromeDriver();
-        webDriver.manage().window().maximize();
+        driver= new ChromeDriver();
+        driver.manage().window().maximize();
 
         baseUrl="https://www.deezer.com/en/";
+        driver.get(baseUrl);
+
+        //accept cookies
+        try{
+            WebElement acceptCookiesBtn;
+            acceptCookiesBtn = webDriver.findElement(By.xpath("//*[@id=\"gdpr-btn-accept-all\"]"));
+            acceptCookiesBtn.click();
+
+        }catch (ElementNotVisibleException e){
+            System.out.println("Cookies already accepted");
+
+        }catch (NullPointerException e){
+            System.out.println(e);
+        }
+
         try{
             File file = new File("Cookies.data");
             FileReader fileReader = new FileReader(file);
@@ -38,21 +55,24 @@ public class logIn {
                     String val;
                     if(!(val=token.nextToken()).equals("null"))
                     {
-                        Date expDate = new SimpleDateFormat( "EEE MMM dd HH:mm:ss z yyyy").parse(val);
+                        Date expDate = new SimpleDateFormat( "EEE MMM dd HH:mm:ss z yyyy", Locale.UK).parse(val);
                         expiry = expDate;
                     }
                     Boolean isSecure = Boolean.valueOf(token.nextToken());
                     Cookie ck = new Cookie(name,value,domain,path,expiry,isSecure);
                     System.out.println(ck);
-                    webDriver.manage().addCookie(ck); // This will add the stored cookie to your current session
+                    driver.manage().addCookie(ck); // This will add the stored cookie to your current session
                 }
             }
         }catch(Exception ex){
             ex.printStackTrace();
         }
+
         Thread.sleep(2000);
-        webDriver.get(baseUrl);
+        driver.get(baseUrl);
+        Thread.sleep(2000);
         System.out.println("Logged in successfully");
+        return driver;
     }
 
     void getCookie() throws InterruptedException {
@@ -117,6 +137,10 @@ public class logIn {
         }
         Thread.sleep(2000);
 
+    }
+
+    void closeDriver(){
+        webDriver.close();
     }
 
 }
