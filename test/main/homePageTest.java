@@ -130,8 +130,14 @@ public class homePageTest {
     }
 
     @Test
-    void searchTestCyrilic(){
-
+    void searchTestCyrilic() throws InterruptedException {
+        Thread.sleep(1000);
+        webDriver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[1]/div/form/input")).sendKeys("Тает лёд");
+        Thread.sleep(1000);
+        webDriver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[1]/div/form/input")).sendKeys(Keys.ENTER);
+        Thread.sleep(1000);
+        assertEquals("Тает лёд", webDriver.findElement(By.xpath("/html/body/div[1]/div/main/div[5]/div[1]/div[2]/div[2]/div[1]/div/div[2]/div[1]/div/div[1]/div[3]/div/span")).getText());
+        Thread.sleep(500);
 
     }
 
