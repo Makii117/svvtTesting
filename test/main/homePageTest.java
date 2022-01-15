@@ -41,7 +41,9 @@ public class homePageTest {
         Thread.sleep(1000);
 
         WebElement darkmodeButton = webDriver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[3]/div/div[1]/ul/li[6]/div/label"));
+
         darkmodeButton.click();
+        assertEquals("input-switch input-switch is-checked",darkmodeButton.getAttribute("class"));
         Thread.sleep(1000);
     }
 

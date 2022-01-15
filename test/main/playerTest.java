@@ -73,21 +73,25 @@ public class playerTest {
         assertEquals("The Hills", songName.getText());
         WebElement viewLyrics = webDriver.findElement(By.xpath("/html/body/div[1]/div/div[5]/div/div[2]/div/div[1]/div[3]/ul/li[1]/button"));
         viewLyrics.click();
+        Thread.sleep(5000);
+        viewLyrics.click();
         Thread.sleep(1000);
-
 
         WebElement skip = webDriver.findElement(By.xpath("/html/body/div[1]/div/div[5]/div[1]/div[1]/ul/li[5]/div/button"));
         skip.click();
+        Thread.sleep(1000);
 
         assertNotEquals("Blinding Lights", songName.getText());
 
         // check if button is play or pause
         WebElement pauseBtn = webDriver.findElement(By.xpath("/html/body/div[1]/div/div[5]/div[1]/div[1]/ul/li[3]/button"));
-        String pause = webDriver.findElement(By.cssSelector("button.svg-icon-group-btn.is-highlight")).getAttribute("aria-label");
-
-        assertEquals("Play", pause);
+        String pause = webDriver.findElement(By.xpath("/html/body/div[1]/div/div[5]/div/div[1]/ul/li[3]/button")).getAttribute("aria-label");
+        System.out.println(pause);
+        assertEquals("Pause", pause);
         pauseBtn.click();
-        pauseBtn.click();
+        Thread.sleep(500);
+        pause = webDriver.findElement(By.xpath("/html/body/div[1]/div/div[5]/div/div[1]/ul/li[3]/button")).getAttribute("aria-label");
+        System.out.println(pause);
         assertEquals("Play", pause);
 
         Thread.sleep(10000);
