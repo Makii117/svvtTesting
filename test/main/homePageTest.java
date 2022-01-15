@@ -75,7 +75,59 @@ public class homePageTest {
             System.out.println(e);
         }
     }
+    @Test
+    void leftNavbarTest() throws InterruptedException {
+        WebElement musicTab,podcastTab,browseTab,favouritesTab,favouriteTracksTab,playlistsTab,albumsTab,artistsTab,savedPodcasts;
 
+        ArrayList<WebElement> navBarItems = new ArrayList<>();
+        for(int i = 1;i<10;i++){
+
+            String xpath = String.format("/html/body/div[1]/div/div[4]/div[2]/div[3]/div/ul/li[%d]/a",i);
+            WebElement navBarItem = webDriver.findElement(By.xpath(xpath));
+            navBarItems.add(navBarItem);
+
+        }
+        musicTab = navBarItems.get(0);
+        podcastTab = navBarItems.get(1);
+        browseTab = navBarItems.get(2);
+        favouritesTab = navBarItems.get(3);
+        favouriteTracksTab = navBarItems.get(4);
+        playlistsTab = navBarItems.get(5);
+        albumsTab = navBarItems.get(6);
+        artistsTab  = navBarItems.get(7);
+        savedPodcasts = navBarItems.get(8);
+
+        musicTab.click();
+        Thread.sleep(1000);
+        assertEquals("https://www.deezer.com/en/",webDriver.getCurrentUrl());
+        Thread.sleep(500);
+        podcastTab.click();
+        Thread.sleep(500);
+        assertEquals("https://www.deezer.com/en/podcasts",webDriver.getCurrentUrl());
+        browseTab.click();
+        Thread.sleep(500);
+        assertEquals("https://www.deezer.com/en/channels/explore",webDriver.getCurrentUrl());
+        favouritesTab.click();
+        Thread.sleep(500);
+        assertEquals("https://www.deezer.com/en/profile/4792945622",webDriver.getCurrentUrl());
+        favouriteTracksTab.click();
+        Thread.sleep(500);
+        assertEquals("https://www.deezer.com/en/profile/4792945622/loved",webDriver.getCurrentUrl());
+        playlistsTab.click();
+        Thread.sleep(500);
+        assertEquals("https://www.deezer.com/en/profile/4792945622/playlists",webDriver.getCurrentUrl());
+        albumsTab.click();
+        Thread.sleep(500);
+        assertEquals("https://www.deezer.com/en/profile/4792945622/albums",webDriver.getCurrentUrl());
+        artistsTab.click();
+        Thread.sleep(500);
+        assertEquals("https://www.deezer.com/en/profile/4792945622/artists",webDriver.getCurrentUrl());
+        savedPodcasts.click();
+        Thread.sleep(500);
+        assertEquals("https://www.deezer.com/en/profile/4792945622/podcasts",webDriver.getCurrentUrl());
+        Thread.sleep(500);
+
+    }
 
 }
 
