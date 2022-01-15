@@ -13,7 +13,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class songDetails {
+public class    songDetails {
     @BeforeEach
     void setup(){}
 
