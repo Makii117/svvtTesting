@@ -51,7 +51,7 @@ public class favouritesTest {
         WebElement artistTitle = webDriver.findElement(By.linkText("The Weeknd"));
         assertEquals("The Weeknd", artistTitle.getText());
         artistTitle.click();
-        Thread.sleep(1000);
+        Thread.sleep(10000);
 
         // links
         WebElement discography = webDriver.findElement(By.xpath("//*[@id=\"page_naboo_artist\"]/nav/div/ul/li[1]/a"));
