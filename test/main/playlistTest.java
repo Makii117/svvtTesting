@@ -4,10 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.ElementNotVisibleException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -31,13 +28,20 @@ public class playlistTest {
     }
     @Test
     void createPlaylist() throws InterruptedException {
+
         webDriver.findElement(By.xpath("/html/body/div[1]/div/div[4]/div[2]/div[3]/div/ul/li[6]/a")).click();
         Thread.sleep(5000);
+        //in case of small monitor scroll down for the js to load
+        JavascriptExecutor js = (JavascriptExecutor) webDriver;
+        js.executeScript("window.scrollBy(0,document.body.scrollHeight)", "");
         webDriver.findElement(By.xpath("/html/body/div[1]/div/main/div[5]/div[1]/div[2]/div[2]/div/div/section/div[2]/ul/li[1]/div[2]/div/button")).click();
         Thread.sleep(100);
+
+
+        Thread.sleep(2000);
         WebElement plName = webDriver.findElement(By.xpath("/html/body/div[1]/div/div[8]/div[2]/div/div/div[2]/div/div[1]/input"));
         //playlist name
-        plName.sendKeys("TestPlaylist");
+        plName.sendKeys("TestPlaylist1");
         webDriver.findElement(By.xpath("/html/body/div[1]/div/div[8]/div[2]/div/div/div[2]/div/div[3]/button")).click();
         Thread.sleep(1000);
     }
@@ -48,7 +52,13 @@ public class playlistTest {
         webDriver.findElement(By.xpath("/html/body/div[1]/div/main/div[5]/div[1]/div[2]/section[2]/div[2]/ul/li[1]/a/figure/div[1]")).click();
 
         Thread.sleep(1000);
+
         webDriver.findElement(By.xpath("/html/body/div[1]/div/main/div[5]/div[1]/div[2]/section[1]/div/div[2]/div/div/ul/li[1]/figure/div")).click();
+        Thread.sleep(1000);
+
+        //in case of small monitor scroll down for the js to load
+        JavascriptExecutor js = (JavascriptExecutor) webDriver;
+        js.executeScript("window.scrollBy(0,300)", "");
         Thread.sleep(1000);
         for(int i=1;i<=6; i++){
             String xpath = String.format("/html/body/div[1]/div/main/div[5]/div[1]/div[2]/div[1]/div/div[3]/div[2]/div/div/div[%d]/div/div[1]/div[4]/div/button",i);
