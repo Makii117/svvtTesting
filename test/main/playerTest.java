@@ -78,8 +78,7 @@ public class playerTest {
 
         WebElement skip = webDriver.findElement(By.xpath("/html/body/div[1]/div/div[5]/div[1]/div[1]/ul/li[5]/div/button"));
         skip.click();
-        WebElement favourite = webDriver.findElement(By.xpath("/html/body/div[1]/div/div[5]/div/div[2]/div/div[1]/div[2]/ul/li[3]/button"));
-        favourite.click();
+
         assertNotEquals("Blinding Lights", songName.getText());
 
         // check if button is play or pause
@@ -88,9 +87,10 @@ public class playerTest {
 
         assertEquals("Play", pause);
         pauseBtn.click();
-        assertEquals("Pause", pause);
+        pauseBtn.click();
+        assertEquals("Play", pause);
 
-        Thread.sleep(20000);
+        Thread.sleep(10000);
 
 
 

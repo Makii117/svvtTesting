@@ -20,40 +20,11 @@ public class homePageTest {
     private String Email="steel-fifty-32@inboxkitten.com";
     private String uName="steel-fifty-32";
     private String Password = "SvvtTestingAccount1";
+    private static logIn login = new logIn();
 
     @BeforeEach
-    void setUp() throws InterruptedException {
-        System.setProperty("webdriver.chrome.driver","chromedriver.exe");
-        webDriver= new ChromeDriver();
-        webDriver.manage().window().maximize();
-        baseUrl="https://www.deezer.com/en/ ";
-        webDriver.get(baseUrl);
-        Thread.sleep(6000);
-        //accept cookies if not accepted
-        try{
-            WebElement acceptCookiesBtn;
-            acceptCookiesBtn = webDriver.findElement(By.xpath("//*[@id=\"gdpr-btn-accept-all\"]"));
-            acceptCookiesBtn.click();
-
-        }catch (ElementNotVisibleException e){
-            System.out.println("Cookies already accepted");
-
-        }
-
-        WebElement loginButton = webDriver.findElement(By.xpath("/html/body/div[1]/div/a"));
-        loginButton.click();
-
-        // form
-        WebElement emailField = webDriver.findElement(By.xpath("//*[@id=\"login_mail\"]"));
-        emailField.sendKeys("steel-fifty-32@inboxkitten.com");
-        WebElement passwordField = webDriver.findElement(By.xpath("//*[@id=\"login_password\"]"));
-        passwordField.sendKeys("SvvtTestingAccount1");
-        Thread.sleep(2000);
-
-        WebElement loginBtn = webDriver.findElement(By.id("login_form_submit"));
-        loginBtn.click();
-        // in case of captcha, which can happen it is left to 20000 so we can click through it
-        Thread.sleep(20000);
+    void setup() throws InterruptedException {
+        webDriver = login.login();
     }
 
 
@@ -71,6 +42,7 @@ public class homePageTest {
 
         WebElement darkmodeButton = webDriver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[3]/div/div[1]/ul/li[6]/div/label"));
         darkmodeButton.click();
+        Thread.sleep(1000);
     }
 
 }
