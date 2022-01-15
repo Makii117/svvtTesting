@@ -16,33 +16,19 @@ import java.util.StringTokenizer;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class getCookiesTest {
+public class cookieLoginTest {
     private static WebDriver webDriver;
-    private static String baseUrl;
-    private String Email="steel-fifty-32@inboxkitten.com";
-    private String uName="steel-fifty-32";
-    private String Password = "SvvtTestingAccount1";
-    private static logIn login = new logIn();
+    private static final logIn login = new logIn();
 
-    @BeforeEach
-    void setup() throws InterruptedException {
-    webDriver = login.login();
-    }
 
-    @AfterEach
-    void teardown(){
-        webDriver.close();
-    }
+
     @Test
-    void test() throws InterruptedException {
+    void ckLoginTest() throws InterruptedException {
+        webDriver = login.login();
         Thread.sleep(2000);
         assertEquals("steel-fifty-32",webDriver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[3]/button/img")).getAttribute("alt"));
-
-    }
-
-    @Test
-    void playSong(){
-
+        Thread.sleep(2000);
+        webDriver.close();
     }
 
 }

@@ -91,9 +91,24 @@ public class landingPageTest {
     }
 
 
-    // TODO - FIGURE OUT HOW TO TEST MULTIPLE LINKS AT ONCE
+    // TODO - app download pages
     @Test
-    void testSocials(){
+    void testAppDownloads() throws InterruptedException {
+        WebElement appStore = webDriver.findElement(By.xpath("/html/body/div[3]/footer/div[1]/a[1]/img"));
+        appStore.click();
+        Thread.sleep(1000);
+        WebElement appStoreHeader = webDriver.findElement(By.xpath("/html/body/div[5]/main/div[2]/section[1]/div/div[2]/header/h1"));
+        assertEquals("Deezer: Music & Podcast Player 12+",appStoreHeader.getText());
+        Thread.sleep(1000);
+        webDriver.navigate().back();
+        webDriver.navigate().back();
+
+        Thread.sleep(1000);
+        WebElement googlePlay = webDriver.findElement(By.xpath("/html/body/div[3]/footer/div[1]/a[2]/img"));
+        googlePlay.click();
+        Thread.sleep(1000);
+        WebElement googlePlayHeader = webDriver.findElement(By.xpath("/html/body/div[1]/div[4]/c-wiz/div/div[2]/div/div/main/c-wiz[1]/c-wiz[1]/div/div[2]/div/div[1]/c-wiz[1]/h1/span"));
+        assertEquals("Deezer: Music & Podcast Player",googlePlayHeader.getText());
 
     }
 
