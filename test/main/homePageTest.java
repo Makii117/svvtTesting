@@ -129,6 +129,12 @@ public class homePageTest {
 
     }
 
+    @Test
+    void searchTestCyrilic(){
+
+
+    }
+
 }
 
 

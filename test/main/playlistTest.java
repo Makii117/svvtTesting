@@ -36,9 +36,10 @@ public class playlistTest {
         webDriver.findElement(By.xpath("/html/body/div[1]/div/main/div[5]/div[1]/div[2]/div[2]/div/div/section/div[2]/ul/li[1]/div[2]/div/button")).click();
         Thread.sleep(100);
         WebElement plName = webDriver.findElement(By.xpath("/html/body/div[1]/div/div[8]/div[2]/div/div/div[2]/div/div[1]/input"));
+        //playlist name
         plName.sendKeys("TestPlaylist");
         webDriver.findElement(By.xpath("/html/body/div[1]/div/div[8]/div[2]/div/div/div[2]/div/div[3]/button")).click();
-
+        Thread.sleep(1000);
     }
     @Test
     void addToPlaylist() throws InterruptedException {
@@ -64,9 +65,6 @@ public class playlistTest {
             Thread.sleep(500);
 
         }
-
-
-
     }
 
     @Test
