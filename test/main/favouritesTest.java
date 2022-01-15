@@ -83,7 +83,7 @@ public class favouritesTest {
         Thread.sleep(20000);
     }
 
-gj
+
     @Test
     void testAddFavourite() throws InterruptedException {
         WebElement artists_tab  = webDriver.findElement(By.xpath("/html/body/div[1]/div/div[4]/div[2]/div[3]/div/ul/li[8]/a"));
