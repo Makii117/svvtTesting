@@ -34,15 +34,20 @@ public class playlistTest {
         //in case of small monitor scroll down for the js to load
         JavascriptExecutor js = (JavascriptExecutor) webDriver;
         js.executeScript("window.scrollBy(0,document.body.scrollHeight)", "");
+        Thread.sleep(1000);
         webDriver.findElement(By.xpath("/html/body/div[1]/div/main/div[5]/div[1]/div[2]/div[2]/div/div/section/div[2]/ul/li[1]/div[2]/div/button")).click();
         Thread.sleep(100);
-
 
         Thread.sleep(2000);
         WebElement plName = webDriver.findElement(By.xpath("/html/body/div[1]/div/div[8]/div[2]/div/div/div[2]/div/div[1]/input"));
         //playlist name
         plName.sendKeys("TestPlaylist1");
         webDriver.findElement(By.xpath("/html/body/div[1]/div/div[8]/div[2]/div/div/div[2]/div/div[3]/button")).click();
+        Thread.sleep(100);
+        webDriver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div/div/div[2]/div[2]/button")).click();
+
+        Thread.sleep(500);
+        assertEquals("TestPlaylist1",webDriver.findElement(By.xpath("/html/body/div[1]/div/main/div[5]/div[1]/div[2]/div[1]/div/div[1]/div/div[2]/h1")).getText());
         Thread.sleep(1000);
     }
 
@@ -74,8 +79,16 @@ public class playlistTest {
             Thread.sleep(500);
             webDriver.findElement(By.xpath("/html/body/div[7]/div/div[2]/div[2]/ul/div/div/li[1]/button")).click();
             Thread.sleep(500);
-
+            WebElement addedPopup = webDriver.findElement(By.xpath("/html/body/div[1]/div/aside/div/h2"));
+            if(addedPopup.getText().equals("Added to playlist")) {
+                assertEquals("Added to playlist", addedPopup.getText());
+                Thread.sleep(500);
+            }else{
+                assertEquals("This track has already been added to the playlist", addedPopup.getText());
+                Thread.sleep(500);
+            }
         }
+
     }
 
     @Test
@@ -87,8 +100,13 @@ public class playlistTest {
         Thread.sleep(1000);
         //play the playlist
         webDriver.findElement(By.xpath("/html/body/div[1]/div/main/div[5]/div[1]/div[2]/div[1]/div/div[1]/div/div[2]/div[2]/div/div[1]/button")).click();
-        //wait 10 seconds and exit
-        Thread.sleep(10000);
+        Thread.sleep(5000);
+        //Check if its being played
+        String pause = webDriver.findElement(By.xpath("/html/body/div[1]/div/div[5]/div/div[1]/ul/li[3]/button")).getAttribute("aria-label");
+        System.out.println(pause);
+        assertEquals("Pause", pause);
+        //wait 9 seconds and exit
+        Thread.sleep(9000);
 
     }
 }
