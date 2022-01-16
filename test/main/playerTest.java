@@ -39,8 +39,12 @@ public class playerTest {
         Thread.sleep(2000);
         WebElement dailyPlayButton = webDriver.findElement(By.xpath("/html/body/div[1]/div/main/div[5]/div[1]/div[2]/section[1]/div/div[2]/div/div/ul/li[1]/figure/ul/li/button"));
         dailyPlayButton.click();
-        Thread.sleep(20000);
+        Thread.sleep(15000);
 
+        WebElement pauseBtn = webDriver.findElement(By.xpath("/html/body/div[1]/div/div[5]/div[1]/div[1]/ul/li[3]/button"));
+        String pause = webDriver.findElement(By.xpath("/html/body/div[1]/div/div[5]/div/div[1]/ul/li[3]/button")).getAttribute("aria-label");
+        System.out.println(pause);
+        assertEquals("Pause", pause);
     }
 
 
@@ -95,8 +99,6 @@ public class playerTest {
         assertEquals("Play", pause);
 
         Thread.sleep(10000);
-
-
 
     }
 

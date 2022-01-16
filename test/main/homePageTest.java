@@ -75,6 +75,7 @@ public class homePageTest {
             System.out.println(e);
         }
     }
+
     @Test
     void leftNavbarTest() throws InterruptedException {
         WebElement musicTab,podcastTab,browseTab,favouritesTab,favouriteTracksTab,playlistsTab,albumsTab,artistsTab,savedPodcasts;

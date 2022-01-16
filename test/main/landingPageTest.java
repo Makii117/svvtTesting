@@ -17,7 +17,8 @@ public class landingPageTest {
     private static WebDriver webDriver;
     private static String baseUrl;
 
-
+    private static String learnmoreURL = "https://features.deezer.com/transfer-playlist/";
+    private static String discoverURL = "https://features.deezer.com/?_ga=2.171111136.1133185371.1642300747-995392933.1642300747&_gl=1*1ifyzmf*_ga*OTk1MzkyOTMzLjE2NDIzMDA3NDc.*_ga_71WQ7Y8JLG*MTY0MjMwMDc0Ny4xLjAuMTY0MjMwMDc0Ny4w";
 
     @BeforeEach
     void setUp() throws InterruptedException {
@@ -64,6 +65,7 @@ public class landingPageTest {
         discoverLink.click();
         WebElement discoverText = webDriver.findElement(By.xpath("//*[@id=\"__next\"]/main/section[2]/div[1]/div/h2"));
 
+        assertEquals(discoverURL, webDriver.getCurrentUrl());
         assertEquals("Experience Flow, only on Deezer.", discoverText.getText()) ;
     }
 
@@ -75,6 +77,7 @@ public class landingPageTest {
         WebElement learnText = webDriver.findElement(By.xpath("//*[@id=\"__next\"]/main/section[1]/div/h1"));
         Thread.sleep(1000);
 
+        assertEquals(learnmoreURL, webDriver.getCurrentUrl());
         assertEquals("Switching to Deezer has never been easier", learnText.getText());
     }
 

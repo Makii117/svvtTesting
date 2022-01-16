@@ -51,7 +51,7 @@ public class favouritesTest {
         WebElement artistTitle = webDriver.findElement(By.linkText("The Weeknd"));
         assertEquals("The Weeknd", artistTitle.getText());
         artistTitle.click();
-        Thread.sleep(10000);
+        Thread.sleep(1000);
 
         // links
         WebElement discography = webDriver.findElement(By.xpath("//*[@id=\"page_naboo_artist\"]/nav/div/ul/li[1]/a"));
@@ -80,7 +80,7 @@ public class favouritesTest {
         Thread.sleep(100);
         assertEquals("Bio", bio.getText());
         bio.click();
-        Thread.sleep(20000);
+        Thread.sleep(2000);
     }
 
 

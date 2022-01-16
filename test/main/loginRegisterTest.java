@@ -79,7 +79,6 @@ class loginRegisterTest {
     @Test
     void registerTest() throws InterruptedException {
 
-
         WebElement registerButton;
         registerButton= webDriver.findElement(By.xpath("//*[@id=\"page-homepage\"]/section[1]/ul[1]/li/div/a[2]"));
         registerButton.click();
